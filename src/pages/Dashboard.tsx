@@ -119,19 +119,35 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
               <CardTitle className="text-foreground">Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => window.location.href = "/register-land"}
+              >
                 <Plus className="w-4 h-4 mr-2" />
                 Register New Land
               </Button>
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => window.location.href = "/search-records"}
+              >
                 <Search className="w-4 h-4 mr-2" />
                 Search Land Records
               </Button>
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => window.location.href = "/process-transfer"}
+              >
                 <FileText className="w-4 h-4 mr-2" />
                 Process Transfer
               </Button>
-              <Button className="w-full justify-start" variant="outline">
+              <Button 
+                className="w-full justify-start" 
+                variant="outline"
+                onClick={() => window.location.href = "/land-subdivision"}
+              >
                 <MapPin className="w-4 h-4 mr-2" />
                 Land Subdivision
               </Button>
