@@ -3,7 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { MapPin, FileText, Users, Search, Plus, Shield, Eye } from "lucide-react";
+import {
+  MapPin,
+  FileText,
+  Users,
+  Search,
+  Plus,
+  Shield,
+  Eye,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface DashboardProps {
   userRole: "administrator" | "surveyor" | "valuer" | "registrar";
@@ -21,28 +30,28 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
         { label: "Total Properties", value: "2,847", icon: MapPin },
         { label: "Active Users", value: "156", icon: Users },
         { label: "Pending Registrations", value: "23", icon: FileText },
-        { label: "System Health", value: "98%", icon: Shield }
-      ]
+        { label: "System Health", value: "98%", icon: Shield },
+      ],
     },
     surveyor: {
-      title: "Surveyor Dashboard", 
+      title: "Surveyor Dashboard",
       color: "bg-gradient-secondary",
       stats: [
         { label: "Surveys Completed", value: "134", icon: MapPin },
         { label: "Pending Reviews", value: "8", icon: FileText },
         { label: "Subdivisions", value: "45", icon: Plus },
-        { label: "This Month", value: "12", icon: Eye }
-      ]
+        { label: "This Month", value: "12", icon: Eye },
+      ],
     },
     valuer: {
       title: "Chief Government Valuer Dashboard",
-      color: "bg-gradient-primary", 
+      color: "bg-gradient-primary",
       stats: [
         { label: "Valuations Done", value: "89", icon: FileText },
         { label: "Pending Approvals", value: "15", icon: Eye },
         { label: "Average Value", value: "$45K", icon: MapPin },
-        { label: "This Quarter", value: "67", icon: Shield }
-      ]
+        { label: "This Quarter", value: "67", icon: Shield },
+      ],
     },
     registrar: {
       title: "Registrar Dashboard",
@@ -51,17 +60,37 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
         { label: "Titles Registered", value: "456", icon: Shield },
         { label: "Transfers Approved", value: "78", icon: Users },
         { label: "Pending Final Review", value: "12", icon: Eye },
-        { label: "Success Rate", value: "99.2%", icon: FileText }
-      ]
-    }
+        { label: "Success Rate", value: "99.2%", icon: FileText },
+      ],
+    },
   };
 
   const config = roleConfig[userRole];
   const recentActivities = [
-    { id: "LT-2024-001", action: "Land Registration", status: "Completed", date: "2024-01-15" },
-    { id: "LT-2024-002", action: "Ownership Transfer", status: "Pending", date: "2024-01-14" },
-    { id: "LT-2024-003", action: "Land Subdivision", status: "In Review", date: "2024-01-13" },
-    { id: "LT-2024-004", action: "Title Verification", status: "Completed", date: "2024-01-12" }
+    {
+      id: "LT-2024-001",
+      action: "Land Registration",
+      status: "Completed",
+      date: "2024-01-15",
+    },
+    {
+      id: "LT-2024-002",
+      action: "Ownership Transfer",
+      status: "Pending",
+      date: "2024-01-14",
+    },
+    {
+      id: "LT-2024-003",
+      action: "Land Subdivision",
+      status: "In Review",
+      date: "2024-01-13",
+    },
+    {
+      id: "LT-2024-004",
+      action: "Title Verification",
+      status: "Completed",
+      date: "2024-01-12",
+    },
   ];
 
   return (
@@ -74,7 +103,9 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">Uganda Land Registry</h1>
+              <h1 className="text-xl font-bold text-foreground">
+                Uganda Land Registry
+              </h1>
               <Badge variant="secondary" className="text-xs">
                 {userRole.charAt(0).toUpperCase() + userRole.slice(1)}
               </Badge>
@@ -88,10 +119,13 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
 
       <div className="container mx-auto px-4 py-8">
         {/* Role Title */}
-        <div className={`${config.color} rounded-lg p-6 text-white mb-8 shadow-medium`}>
+        <div
+          className={`${config.color} rounded-lg p-6 text-white mb-8 shadow-medium`}
+        >
           <h2 className="text-2xl font-bold">{config.title}</h2>
           <p className="text-white/80 mt-2">
-            Welcome back! Here's an overview of your current activities and pending tasks.
+            Welcome back! Here's an overview of your current activities and
+            pending tasks.
           </p>
         </div>
 
@@ -102,8 +136,12 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-muted-foreground text-sm">{stat.label}</p>
-                    <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                    <p className="text-muted-foreground text-sm">
+                      {stat.label}
+                    </p>
+                    <p className="text-2xl font-bold text-foreground">
+                      {stat.value}
+                    </p>
                   </div>
                   <stat.icon className="w-8 h-8 text-primary" />
                 </div>
@@ -119,45 +157,43 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
               <CardTitle className="text-foreground">Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => window.location.href = "/register-land"}
+              <Link
+                className="w-full justify-start flex items-center border rounded bg-muted hover:bg-[#f9d51f] font-medium text-[14px] p-2"
+                to="/register-land"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Register New Land
-              </Button>
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => window.location.href = "/search-records"}
+              </Link>
+              <Link
+                className="w-full justify-start flex items-center border rounded bg-muted hover:bg-[#f9d51f] font-medium text-[14px] p-2"
+                to="/search-records"
               >
                 <Search className="w-4 h-4 mr-2" />
                 Search Land Records
-              </Button>
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => window.location.href = "/process-transfer"}
+              </Link>
+              <Link
+                className="w-full justify-start flex items-center border rounded bg-muted hover:bg-[#f9d51f] font-medium text-[14px] p-2"
+                to="/process-transfer"
               >
                 <FileText className="w-4 h-4 mr-2" />
                 Process Transfer
-              </Button>
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => window.location.href = "/land-subdivision"}
+              </Link>
+              <Link
+                className="w-full justify-start flex items-center border rounded bg-muted hover:bg-[#f9d51f] font-medium text-[14px] p-2"
+                to="/land-subdivision"
               >
                 <MapPin className="w-4 h-4 mr-2" />
                 Land Subdivision
-              </Button>
+              </Link>
             </CardContent>
           </Card>
 
           {/* Land Search */}
           <Card className="shadow-medium">
             <CardHeader>
-              <CardTitle className="text-foreground">Land Title Search</CardTitle>
+              <CardTitle className="text-foreground">
+                Land Title Search
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex space-x-2">
@@ -183,13 +219,22 @@ const Dashboard = ({ userRole, onLogout }: DashboardProps) => {
             </CardHeader>
             <CardContent className="space-y-3">
               {recentActivities.map((activity) => (
-                <div key={activity.id} className="flex items-center justify-between p-2 rounded border">
+                <div
+                  key={activity.id}
+                  className="flex items-center justify-between p-2 rounded border"
+                >
                   <div className="flex-1">
-                    <p className="font-medium text-sm text-foreground">{activity.id}</p>
-                    <p className="text-xs text-muted-foreground">{activity.action}</p>
+                    <p className="font-medium text-sm text-foreground">
+                      {activity.id}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {activity.action}
+                    </p>
                   </div>
                   <Badge
-                    variant={activity.status === "Completed" ? "default" : "secondary"}
+                    variant={
+                      activity.status === "Completed" ? "default" : "secondary"
+                    }
                     className="text-xs"
                   >
                     {activity.status}
